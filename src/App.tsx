@@ -3,14 +3,22 @@ import Header from './components/Header';
 import Checkout from './components/Checkout';
 import { CartProvider, useCart } from './context/CartContext';
 import { CurrencyProvider, useCurrency } from './context/CurrencyContext';
+import { Sparkles, Award, Zap, Truck, Gift, Star, Video, ShoppingBag } from 'lucide-react';
 
 const products = [
-  { id: 1, name: "Glow Serum Gold", price: 45.00, image: "https://picsum.photos/seed/beauty1/800/1000" },
+  { id: 1, name: "Fatima's Glow Serum", price: 45.00, image: "https://picsum.photos/seed/beauty1/800/1000" },
   { id: 2, name: "Velvet Lip Crimson", price: 32.00, image: "https://picsum.photos/seed/beauty2/800/1000" },
   { id: 3, name: "Radiant Eye Palette", price: 58.00, image: "https://picsum.photos/seed/beauty3/800/1000" },
   { id: 4, name: "Silk Foundation", price: 65.00, image: "https://picsum.photos/seed/beauty4/800/1000" },
   { id: 5, name: "Midnight Fragrance", price: 120.00, image: "https://picsum.photos/seed/beauty5/800/1000" },
   { id: 6, name: "Hydra Mist", price: 28.00, image: "https://picsum.photos/seed/beauty6/800/1000" },
+];
+
+const trendingProducts = [
+  { id: 7, name: "Magic Cream Moisturizer", price: 100.00, image: "https://picsum.photos/seed/beauty7/800/1000" },
+  { id: 8, name: "Pillow Talk Lipstick", price: 35.00, image: "https://picsum.photos/seed/beauty8/800/1000" },
+  { id: 9, name: "Airbrush Flawless Foundation", price: 49.00, image: "https://picsum.photos/seed/beauty9/800/1000" },
+  { id: 10, name: "Hollywood Flawless Filter", price: 49.00, image: "https://picsum.photos/seed/beauty10/800/1000" },
 ];
 
 function AppContent() {
@@ -54,6 +62,35 @@ function AppContent() {
           </div>
         </section>
 
+        {/* Authority Section */}
+        <section className="bg-white py-12 border-b border-gray-100">
+          <div className="max-w-7xl mx-auto px-8">
+            <h3 className="text-center text-luxury-velvet uppercase tracking-[0.3em] text-sm font-bold mb-10">
+              Legendary Beauty For A Reason
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="flex flex-col items-center text-center group">
+                <div className="w-12 h-12 rounded-full bg-luxury-cream flex items-center justify-center mb-4 group-hover:bg-luxury-velvet group-hover:text-white transition-colors duration-300">
+                  <Sparkles size={24} />
+                </div>
+                <p className="text-[10px] uppercase tracking-widest font-bold">Fashion & Beauty Curators</p>
+              </div>
+              <div className="flex flex-col items-center text-center group">
+                <div className="w-12 h-12 rounded-full bg-luxury-cream flex items-center justify-center mb-4 group-hover:bg-luxury-velvet group-hover:text-white transition-colors duration-300">
+                  <Award size={24} />
+                </div>
+                <p className="text-[10px] uppercase tracking-widest font-bold">Luxury Performance Products</p>
+              </div>
+              <div className="flex flex-col items-center text-center group">
+                <div className="w-12 h-12 rounded-full bg-luxury-cream flex items-center justify-center mb-4 group-hover:bg-luxury-velvet group-hover:text-white transition-colors duration-300">
+                  <Zap size={24} />
+                </div>
+                <p className="text-[10px] uppercase tracking-widest font-bold">Style Innovators</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Product Grid */}
         <section className="py-24 px-8 max-w-7xl mx-auto">
           <div className="text-center mb-16">
@@ -90,6 +127,44 @@ function AppContent() {
           </div>
         </section>
 
+        {/* Trending Now Grid */}
+        <section className="py-24 bg-luxury-cream">
+          <div className="max-w-7xl mx-auto px-8">
+            <div className="flex justify-between items-end mb-12">
+              <div>
+                <h3 className="text-3xl font-serif text-luxury-velvet">Trending Now</h3>
+                <div className="w-24 h-0.5 bg-luxury-velvet mt-4"></div>
+              </div>
+              <a href="#" className="text-[10px] uppercase tracking-widest font-bold border-b border-luxury-velvet pb-1 hover:text-luxury-velvet transition-colors">
+                Shop All Trending
+              </a>
+            </div>
+            
+            <div className="flex overflow-x-auto gap-8 pb-8 scrollbar-hide">
+              {trendingProducts.map((product) => (
+                <div key={product.id} className="min-w-[280px] md:min-w-[300px] group bg-white p-4 shadow-sm hover:shadow-md transition-shadow">
+                  <div className="relative aspect-[4/5] bg-gray-50 mb-4 overflow-hidden">
+                    <img 
+                      src={product.image} 
+                      alt={product.name} 
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                      referrerPolicy="no-referrer"
+                    />
+                    <button 
+                      onClick={() => addToCart(product)}
+                      className="absolute bottom-0 left-0 w-full bg-luxury-velvet text-white py-3 uppercase text-[10px] tracking-[0.2em] font-bold transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 flex items-center justify-center gap-2"
+                    >
+                      <ShoppingBag size={14} /> Add to Bag
+                    </button>
+                  </div>
+                  <h4 className="text-[11px] uppercase tracking-widest mb-1 font-bold truncate">{product.name}</h4>
+                  <p className="text-luxury-velvet font-serif">{formatPrice(product.price)}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         <section className="bg-luxury-charcoal text-white py-24 px-8 text-center">
           <h3 className="text-4xl font-serif mb-6 italic">Fatima's Darlings</h3>
           <p className="max-w-2xl mx-auto text-gray-400 mb-10 font-light tracking-wide">
@@ -98,6 +173,32 @@ function AppContent() {
           <button className="border border-white px-10 py-4 uppercase text-xs tracking-[0.3em] hover:bg-white hover:text-luxury-charcoal transition-all">
             Join the Club
           </button>
+        </section>
+
+        {/* Trust Signals Footer */}
+        <section className="bg-white py-16 border-t border-gray-100">
+          <div className="max-w-7xl mx-auto px-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
+            <div className="flex flex-col items-center text-center">
+              <Truck className="text-luxury-velvet mb-4" size={28} />
+              <h4 className="text-[11px] uppercase tracking-widest font-bold mb-2">Free Delivery</h4>
+              <p className="text-[10px] text-gray-500 uppercase tracking-tighter">Over ₨ 15,000 / $50</p>
+            </div>
+            <div className="flex flex-col items-center text-center">
+              <Gift className="text-luxury-velvet mb-4" size={28} />
+              <h4 className="text-[11px] uppercase tracking-widest font-bold mb-2">2 Free Samples</h4>
+              <p className="text-[10px] text-gray-500 uppercase tracking-tighter">With every order</p>
+            </div>
+            <div className="flex flex-col items-center text-center">
+              <Star className="text-luxury-velvet mb-4" size={28} />
+              <h4 className="text-[11px] uppercase tracking-widest font-bold mb-2">Fatima's Darlings</h4>
+              <p className="text-[10px] text-gray-500 uppercase tracking-tighter">Unlock Loyalty Rewards</p>
+            </div>
+            <div className="flex flex-col items-center text-center">
+              <Video className="text-luxury-velvet mb-4" size={28} />
+              <h4 className="text-[11px] uppercase tracking-widest font-bold mb-2">Online Consultation</h4>
+              <p className="text-[10px] text-gray-500 uppercase tracking-tighter">Book a 1:1 Session</p>
+            </div>
+          </div>
         </section>
       </main>
 

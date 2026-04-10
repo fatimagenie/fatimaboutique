@@ -31,4 +31,12 @@
   .sticky-header {
     @apply sticky top-0 z-50 w-full;
   }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 }
