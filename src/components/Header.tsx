@@ -90,7 +90,7 @@ const Header: React.FC<HeaderProps> = ({ onCheckout, onLoyaltyClick }) => {
 
       {/* Promotional Banner */}
       <div className="bg-luxury-velvet-light text-white text-[11px] py-1.5 px-4 text-center font-medium tracking-wider">
-        <p>Use code <span className="font-bold">FATIMA15</span> for 15% off + FREE shipping on your first order</p>
+        <p>Enjoy <span className="font-bold">FREE SHIPPING</span> and exclusive samples on your first order</p>
       </div>
 
       {/* Branding & Search Row */}

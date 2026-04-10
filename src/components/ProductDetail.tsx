@@ -100,12 +100,12 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product, onBack }) => {
                 {formatPrice(product.price)}
               </p>
 
-              {/* Magical Savings Badge */}
+              {/* Brand Promise Badge */}
               <div className="bg-[#FFF4F4] border border-[#FFD6D6] rounded-sm p-4 mb-8 flex items-start gap-3 shadow-sm">
                 <ShieldCheck className="text-luxury-velvet shrink-0" size={20} />
                 <div>
-                  <p className="text-sm font-bold text-luxury-velvet uppercase tracking-wide">Magical Savings</p>
-                  <p className="text-xs text-gray-700 mt-1">Save 15% on your first order with code <span className="font-bold bg-white px-2 py-0.5 border border-gray-200 ml-1">FATIMA15</span></p>
+                  <p className="text-sm font-bold text-luxury-velvet uppercase tracking-wide">Fatima's Promise</p>
+                  <p className="text-xs text-gray-700 mt-1">Enjoy <span className="font-bold">FREE SHIPPING</span> and choose 2 free samples with your order.</p>
                 </div>
               </div>
 

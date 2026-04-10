@@ -47,7 +47,7 @@ const LoyaltyPage: React.FC<LoyaltyPageProps> = ({ onBack }) => {
               The Magic Hook
             </p>
             <p className="text-base text-gray-800 font-medium">
-              Create an account or log in to unlock <span className="text-luxury-velvet font-bold">15% OFF</span> your first order with code <span className="bg-white border border-gray-200 px-2 py-0.5 ml-1 font-bold">FATIMA15</span> + <span className="font-bold underline decoration-luxury-velvet/30 underline-offset-4">FREE SHIPPING</span>.
+              Create an account or log in to unlock <span className="text-luxury-velvet font-bold">Exclusive Early Access</span> + <span className="font-bold underline decoration-luxury-velvet/30 underline-offset-4">FREE SHIPPING</span>.
             </p>
           </div>
 
