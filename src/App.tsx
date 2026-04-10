@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Header from './components/Header';
 import Checkout from './components/Checkout';
+import ProductDetail from './components/ProductDetail';
 import { CartProvider, useCart } from './context/CartContext';
 import { CurrencyProvider, useCurrency } from './context/CurrencyContext';
 import { Sparkles, Award, Zap, Truck, Gift, Star, Video, ShoppingBag } from 'lucide-react';
@@ -22,12 +23,17 @@ const trendingProducts = [
 ];
 
 function AppContent() {
-  const [view, setView] = useState<'home' | 'checkout'>('home');
+  const [view, setView] = useState<'home' | 'checkout' | 'pdp'>('home');
+  const [selectedProduct, setSelectedProduct] = useState<any>(null);
   const { addToCart, setIsBagOpen } = useCart();
   const { formatPrice } = useCurrency();
 
   if (view === 'checkout') {
     return <Checkout onBack={() => setView('home')} />;
+  }
+
+  if (view === 'pdp' && selectedProduct) {
+    return <ProductDetail product={selectedProduct} onBack={() => setView('home')} />;
   }
 
   return (
@@ -100,7 +106,7 @@ function AppContent() {
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             {products.map((product) => (
-              <div key={product.id} className="group cursor-pointer">
+              <div key={product.id} className="group cursor-pointer" onClick={() => { setSelectedProduct(product); setView('pdp'); }}>
                 <div className="relative aspect-[4/5] bg-gray-100 mb-4 overflow-hidden">
                   <img 
                     src={product.image} 
@@ -142,7 +148,7 @@ function AppContent() {
             
             <div className="flex overflow-x-auto gap-8 pb-8 scrollbar-hide">
               {trendingProducts.map((product) => (
-                <div key={product.id} className="min-w-[280px] md:min-w-[300px] group bg-white p-4 shadow-sm hover:shadow-md transition-shadow">
+                <div key={product.id} className="min-w-[280px] md:min-w-[300px] group bg-white p-4 shadow-sm hover:shadow-md transition-shadow cursor-pointer" onClick={() => { setSelectedProduct(product); setView('pdp'); }}>
                   <div className="relative aspect-[4/5] bg-gray-50 mb-4 overflow-hidden">
                     <img 
                       src={product.image} 
@@ -151,7 +157,10 @@ function AppContent() {
                       referrerPolicy="no-referrer"
                     />
                     <button 
-                      onClick={() => addToCart(product)}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        addToCart(product);
+                      }}
                       className="absolute bottom-0 left-0 w-full bg-luxury-velvet text-white py-3 uppercase text-[10px] tracking-[0.2em] font-bold transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 flex items-center justify-center gap-2"
                     >
                       <ShoppingBag size={14} /> Add to Bag
