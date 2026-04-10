@@ -8,9 +8,10 @@ import BrandLogo from './BrandLogo';
 
 interface HeaderProps {
   onCheckout: () => void;
+  onLoyaltyClick: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ onCheckout }) => {
+const Header: React.FC<HeaderProps> = ({ onCheckout, onLoyaltyClick }) => {
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { totalItems, setIsBagOpen } = useCart();
@@ -81,7 +82,7 @@ const Header: React.FC<HeaderProps> = ({ onCheckout }) => {
           </a>
         </div>
         <div className="flex items-center gap-4">
-          <a href="#" className="hover:text-luxury-gold transition-colors">
+          <a href="#" onClick={(e) => { e.preventDefault(); onLoyaltyClick(); }} className="hover:text-luxury-gold transition-colors">
             Fatima's Darlings Loyalty Club
           </a>
         </div>

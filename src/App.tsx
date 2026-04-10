@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Header from './components/Header';
 import Checkout from './components/Checkout';
 import ProductDetail from './components/ProductDetail';
+import LoyaltyPage from './components/LoyaltyPage';
 import { CartProvider, useCart } from './context/CartContext';
 import { CurrencyProvider, useCurrency } from './context/CurrencyContext';
 import { Sparkles, Award, Zap, Truck, Gift, Star, Video, ShoppingBag } from 'lucide-react';
@@ -23,7 +24,7 @@ const trendingProducts = [
 ];
 
 function AppContent() {
-  const [view, setView] = useState<'home' | 'checkout' | 'pdp'>('home');
+  const [view, setView] = useState<'home' | 'checkout' | 'pdp' | 'loyalty'>('home');
   const [selectedProduct, setSelectedProduct] = useState<any>(null);
   const { addToCart, setIsBagOpen } = useCart();
   const { formatPrice } = useCurrency();
@@ -36,12 +37,19 @@ function AppContent() {
     return <ProductDetail product={selectedProduct} onBack={() => setView('home')} />;
   }
 
+  if (view === 'loyalty') {
+    return <LoyaltyPage onBack={() => setView('home')} />;
+  }
+
   return (
     <div className="min-h-screen flex flex-col">
-      <Header onCheckout={() => {
-        setView('checkout');
-        setIsBagOpen(false);
-      }} />
+      <Header 
+        onCheckout={() => {
+          setView('checkout');
+          setIsBagOpen(false);
+        }} 
+        onLoyaltyClick={() => setView('loyalty')}
+      />
       
       <main className="flex-grow">
         {/* Hero Section Placeholder */}
@@ -179,7 +187,7 @@ function AppContent() {
           <p className="max-w-2xl mx-auto text-gray-400 mb-10 font-light tracking-wide">
             Join our loyalty club for exclusive access to new launches, birthday treats, and pro-artist tips.
           </p>
-          <button className="border border-white px-10 py-4 uppercase text-xs tracking-[0.3em] hover:bg-white hover:text-luxury-charcoal transition-all">
+          <button onClick={() => setView('loyalty')} className="border border-white px-10 py-4 uppercase text-xs tracking-[0.3em] hover:bg-white hover:text-luxury-charcoal transition-all">
             Join the Club
           </button>
         </section>
@@ -197,9 +205,9 @@ function AppContent() {
               <h4 className="text-[11px] uppercase tracking-widest font-bold mb-2">2 Free Samples</h4>
               <p className="text-[10px] text-gray-500 uppercase tracking-tighter">With every order</p>
             </div>
-            <div className="flex flex-col items-center text-center">
-              <Star className="text-luxury-velvet mb-4" size={28} />
-              <h4 className="text-[11px] uppercase tracking-widest font-bold mb-2">Fatima's Darlings</h4>
+            <div className="flex flex-col items-center text-center cursor-pointer group" onClick={() => setView('loyalty')}>
+              <Star className="text-luxury-velvet mb-4 group-hover:scale-110 transition-transform" size={28} />
+              <h4 className="text-[11px] uppercase tracking-widest font-bold mb-2 group-hover:text-luxury-velvet transition-colors">Fatima's Darlings</h4>
               <p className="text-[10px] text-gray-500 uppercase tracking-tighter">Unlock Loyalty Rewards</p>
             </div>
             <div className="flex flex-col items-center text-center">
